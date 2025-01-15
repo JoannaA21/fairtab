@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import EqualSplit from "./EqualSplit";
 
 const SplitType = () => {
   const location = useLocation();
@@ -8,20 +9,34 @@ const SplitType = () => {
   const splitType = () => {
     if (location.pathname === "/equalsplit") {
       return <Link to="/customsplit">Custom Split</Link>;
-    } else if (location.pathname === "/customsplit") {
+    }
+    if (location.pathname === "/customsplit") {
       return <Link to="/equalsplit">Equal Split</Link>;
-    } else {
+    }
+  };
+
+  // Function to set the header text
+  const setHeader = () => {
+    if (location.pathname === "/equalsplit") {
       return (
-        <Link to="/" className="underline hover:text-red-700 text-red-500">
-          Page does not exist. Go back to home.
-        </Link>
+        <p className="mt-4 sm:mt-10 text-4xl sm:text-3xl font-semibold text-white cursor-default">
+          Equal Split
+        </p>
+      );
+    }
+    if (location.pathname === "/customsplit") {
+      return (
+        <p className="mt-4 sm:mt-10 text-4xl sm:text-3xl font-semibold text-white cursor-default">
+          Custom Split
+        </p>
       );
     }
   };
 
   return (
-    <div className="flex mt-8 sm:mt-12 items-center justify-center">
-      <button className="w-fit h-fit p-3 m-1 sm:m-3 font-medium sm:text-4xl bg-slate-400 hover:bg-black hover:text-white rounded-lg">
+    <div className="flex flex-col h-fit w-full items-center justify-center mx-auto">
+      {setHeader()}
+      <button className="w-fit h-fit p-1 mt-5 sm:m-3 font-medium sm:text-3xl bg-slate-400 hover:bg-black hover:text-white rounded-lg">
         {splitType()}
       </button>
     </div>

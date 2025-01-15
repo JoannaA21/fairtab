@@ -41,7 +41,7 @@ const EqualSplit = () => {
   };
 
   return (
-    <div className="flex min-h-screen max-w-screen-xl mx-auto bg-black">
+    <div className="flex  min-h-screen max-w-screen-xl mx-auto bg-black">
       <div className="m-14 w-full bg-slate-800 rounded-2xl">
         <SplitType />
         {error && <p className="text-red-500">{error}</p>}

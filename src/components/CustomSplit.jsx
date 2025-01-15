@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SplitType from "./SplitType";
 
 const CustomSplit = () => {
   const [bill, setBill] = useState({
@@ -90,69 +91,72 @@ const CustomSplit = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <ul>
-            {bill.contributors.map((contributor, index) => (
-              <li key={index}>
-                <label>Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={contributor.name}
-                  onChange={(e) => handleInputChange(e, index)}
-                />
+    <div className="flex  min-h-screen max-w-screen-xl mx-auto bg-black">
+      <div className="m-14 w-full bg-slate-800 rounded-2xl">
+        <SplitType />
+        <form onSubmit={handleSubmit}>
+          <div>
+            <ul>
+              {bill.contributors.map((contributor, index) => (
+                <li key={index}>
+                  <label>Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={contributor.name}
+                    onChange={(e) => handleInputChange(e, index)}
+                  />
 
-                <label>Amount</label>
-                <input
-                  type="number"
-                  name="amount"
-                  value={contributor.amount}
-                  onChange={(e) => handleInputChange(e, index)}
-                />
-              </li>
-            ))}
-          </ul>
-          <button type="button" onClick={handleNewContributor}>
-            + Add Contributor
-          </button>
-        </div>
+                  <label>Amount</label>
+                  <input
+                    type="number"
+                    name="amount"
+                    value={contributor.amount}
+                    onChange={(e) => handleInputChange(e, index)}
+                  />
+                </li>
+              ))}
+            </ul>
+            <button type="button" onClick={handleNewContributor}>
+              + Add Contributor
+            </button>
+          </div>
 
-        {/* <label>Bill</label>
+          {/* <label>Bill</label>
         <input
           type="number"
           name="totalBill"
           value={bill.totalBill}
           onChange={handleInputChange}
         /> */}
-        <label>Tip Percentage</label>
-        <input
-          type="number"
-          name="tipPercentage"
-          value={bill.tipPercentage}
-          onChange={handleInputChange}
-        />
+          <label>Tip Percentage</label>
+          <input
+            type="number"
+            name="tipPercentage"
+            value={bill.tipPercentage}
+            onChange={handleInputChange}
+          />
 
-        <button type="submit">Calculate</button>
-      </form>
+          <button type="submit">Calculate</button>
+        </form>
 
-      {/* Display error if any */}
-      {error && <p className="error">{error}</p>}
+        {/* Display error if any */}
+        {error && <p className="error">{error}</p>}
 
-      {/* Display the breakdown of the split if available */}
-      {breakdownSplit.length > 0 && (
-        <div>
-          <h2>Breakdown:</h2>
-          <ul>
-            {breakdownSplit.map((contributor, index) => (
-              <li key={index}>
-                {contributor.name}: ${contributor.share}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+        {/* Display the breakdown of the split if available */}
+        {breakdownSplit.length > 0 && (
+          <div>
+            <h2>Breakdown:</h2>
+            <ul>
+              {breakdownSplit.map((contributor, index) => (
+                <li key={index}>
+                  {contributor.name}: ${contributor.share}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
