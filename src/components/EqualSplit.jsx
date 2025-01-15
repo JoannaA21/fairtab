@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SplitType from "./SplitType";
 
 const EqualSplit = () => {
   const [bill, setBill] = useState({
@@ -40,36 +41,39 @@ const EqualSplit = () => {
   };
 
   return (
-    <div>
-      {error && <p className="text-red-500">{error}</p>}
-      <h1>
-        {amountPerPerson ? `$${amountPerPerson.toFixed(2)}` : "Enter details"}
-      </h1>
-      <form onSubmit={handleSubmit}>
-        <label>Total Bill</label>
-        <input
-          type="number"
-          name="totalBill"
-          value={bill.totalBill}
-          onChange={handleInputChange}
-        />
-        <label>Tip Percentage </label>
-        <input
-          type="number"
-          name="tipPercentage"
-          value={bill.tipPercentage}
-          onChange={handleInputChange}
-        />
-        <label>Number of People</label>
-        <input
-          type="number"
-          name="peopleCount"
-          value={bill.peopleCount}
-          onChange={handleInputChange}
-        />
+    <div className="flex min-h-screen max-w-screen-xl mx-auto bg-black">
+      <div className="m-14 w-full bg-slate-800 rounded-2xl">
+        <SplitType />
+        {error && <p className="text-red-500">{error}</p>}
+        <h1>
+          {amountPerPerson ? `$${amountPerPerson.toFixed(2)}` : "Enter details"}
+        </h1>
+        <form onSubmit={handleSubmit}>
+          <label>Total Bill</label>
+          <input
+            type="number"
+            name="totalBill"
+            value={bill.totalBill}
+            onChange={handleInputChange}
+          />
+          <label>Tip Percentage </label>
+          <input
+            type="number"
+            name="tipPercentage"
+            value={bill.tipPercentage}
+            onChange={handleInputChange}
+          />
+          <label>Number of People</label>
+          <input
+            type="number"
+            name="peopleCount"
+            value={bill.peopleCount}
+            onChange={handleInputChange}
+          />
 
-        <button type="submit">Calculate</button>
-      </form>
+          <button type="submit">Calculate</button>
+        </form>
+      </div>
     </div>
   );
 };
