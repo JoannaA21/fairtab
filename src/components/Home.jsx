@@ -16,9 +16,9 @@ const Home = () => {
   return (
     <div className="flex min-h-screen max-w-screen-xl mx-auto bg-black">
       <div className="m-14 w-full bg-slate-800 rounded-2xl">
-        <div className="flex flex-col mt-36 sm:mt-36 items-center justify-center">
+        <div className="flex flex-col mt-36 sm:mt-20 items-center justify-center">
           <img src={logo} alt="logo" className="h-32 sm:h-52" />
-          <h1 className="mt-4 sm:mt-10 text-4xl sm:text-5xl font-semibold text-white font-serif">
+          <h1 className="mt-4 sm:mt-10 text-4xl sm:text-5xl font-semibold text-white font-serif cursor-default">
             Fair Tab
           </h1>
         </div>
