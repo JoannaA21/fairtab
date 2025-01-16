@@ -19,14 +19,14 @@ const SplitType = () => {
   const setHeader = () => {
     if (location.pathname === "/equalsplit") {
       return (
-        <p className="mt-4 sm:mt-10 text-4xl sm:text-3xl font-semibold text-white cursor-default">
+        <p className="mt-4 sm:mt-10 text-4xl sm:text-5xl font-semibold text-white cursor-default">
           Equal Split
         </p>
       );
     }
     if (location.pathname === "/customsplit") {
       return (
-        <p className="mt-4 sm:mt-10 text-4xl sm:text-3xl font-semibold text-white cursor-default">
+        <p className="mt-4 sm:mt-10 text-4xl sm:text-5xl font-semibold text-white cursor-default">
           Custom Split
         </p>
       );
@@ -36,7 +36,7 @@ const SplitType = () => {
   return (
     <div className="flex flex-col h-fit w-full items-center justify-center mx-auto">
       {setHeader()}
-      <button className="w-fit h-fit p-1 mt-5 sm:m-3 font-medium sm:text-3xl bg-slate-400 hover:bg-black hover:text-white rounded-lg">
+      <button className="w-fit h-fit p-1 mt-5 sm:mt-10 font-medium sm:text-xl bg-zinc-300 hover:bg-zinc-950 hover:text-white rounded-lg">
         {splitType()}
       </button>
     </div>

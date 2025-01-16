@@ -91,8 +91,8 @@ const CustomSplit = () => {
   };
 
   return (
-    <div className="flex  min-h-screen max-w-screen-xl mx-auto bg-black">
-      <div className="m-14 w-full bg-slate-800 rounded-2xl">
+    <div className="flex  min-h-screen max-w-screen-xl mx-auto bg-zinc-950">
+      <div className="m-14 w-full bg-zinc-800 rounded-2xl">
         <SplitType />
         <form onSubmit={handleSubmit}>
           <div>
