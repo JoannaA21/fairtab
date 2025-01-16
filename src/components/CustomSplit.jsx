@@ -46,22 +46,10 @@ const CustomSplit = () => {
     }));
   };
 
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     const { tipPercentage, contributors } = bill;
-
-  //     if (tipPercentage < 0) {
-  //       setError("Tip Percentage cannot be negative.");
-  //     }
-  //     if (contributors.amount <= 0) {
-  //       setError("Amount must be greate than 0.");
-  //     }
-  //   };
-
   // Handle form submission (calculating the split)
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Logic for calculating the breakdown or handling any errors can be added here
+    // Logic for calculating the breakdown
     const totalAmount = bill.contributors.reduce(
       (acc, contributor) => acc + parseFloat(contributor.amount),
       0
@@ -76,7 +64,7 @@ const CustomSplit = () => {
     const tipAmount = (totalAmount * bill.tipPercentage) / 100;
     const totalWithTip = totalAmount + tipAmount;
 
-    // Example: breakdown of the split (this is just an example logic)
+    //Breakdown of the split (this is just an example logic)
     const breakdown = bill.contributors
       .map((contributor) => {
         const contributorShare =
@@ -92,6 +80,7 @@ const CustomSplit = () => {
     setError(""); // Clear any previous errors
   };
 
+  //Restarts the form
   const clearForm = () => {
     setBill({
       totalBill: "",
@@ -119,7 +108,7 @@ const CustomSplit = () => {
           </p>
         )}
 
-        {/* form */}
+        {/* Form */}
         <form
           onSubmit={handleSubmit}
           className="flex flex-col mt-4 space-y-6 sm:space-y-8 max-w-xl w-full mx-auto items-center justify-center"
@@ -203,7 +192,7 @@ const CustomSplit = () => {
           )}
         </form>
 
-        {/* Display the breakdown of the split if available */}
+        {/* Display the breakdown */}
         {breakdownSplit.length > 0 && (
           <div className="flex flex-col my-5 md:my-12 w-2/3 sm:w-[20rem] md:w-[25rem]  max-h-fit mx-auto rounded-md bg-white">
             <p className="mx-auto font-medium sm:text-xl md:text-2xl lg:text-3xl">

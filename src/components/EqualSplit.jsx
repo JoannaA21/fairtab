@@ -18,12 +18,24 @@ const EqualSplit = () => {
       return;
     }
     setError("");
-    setBill((prevBill) => ({ ...prevBill, [name]: value }));
-    //setBill((prevBill) => ({ ...prevBill, [name]: parseFloat(value) || 0 }));
+    setBill((prevBill) => ({
+      ...prevBill,
+      [name]: value,
+    }));
   };
 
+  //Calculation and error handling
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the form from reloading the page
+
+    if (
+      bill.totalBill === "" ||
+      bill.tipPercentage === "" ||
+      bill.peopleCount === ""
+    ) {
+      setError("All fields must be filled out.");
+      return;
+    }
 
     const totalBill = parseFloat(bill.totalBill);
     const tipPercentage = parseFloat(bill.tipPercentage);
@@ -48,6 +60,7 @@ const EqualSplit = () => {
     setAmountPerPerson((withTip + totalBill) / peopleCount);
   };
 
+  //Restarts the form
   const clearForm = () => {
     setBill({
       totalBill: "",
@@ -63,14 +76,7 @@ const EqualSplit = () => {
       <div className="m-14 w-full bg-zinc-800 rounded-2xl">
         <SplitType />
 
-        {/* Error */}
-        {/* {error && <p className="text-red-500">{error}</p>} */}
-
-        {/* Result */}
-        {/* <h1 className="flex flex-col my-7 sm:mt-10 text-4xl sm:text-5xl items-center font-medium text-white cursor-default">
-          {amountPerPerson ? `$ ${amountPerPerson.toFixed(2)}` : "$0"}
-        </h1> */}
-
+        {/* Result UI */}
         {error ? (
           <p className="flex flex-col w-3/4 mx-auto my-7 sm:my-10 sm:text-xl items-center font-medium cursor-default text-red-500">
             {error}
@@ -81,7 +87,7 @@ const EqualSplit = () => {
           </h1>
         )}
 
-        {/* form */}
+        {/* Form */}
         <form
           onSubmit={handleSubmit}
           className="flex flex-col space-y-6 sm:space-y-8 max-w-xl w-full mx-auto items-center justify-center"
@@ -121,6 +127,7 @@ const EqualSplit = () => {
             Calculate
           </button>
 
+          {/* Clear button */}
           {amountPerPerson > 0 && !error && (
             <button
               type="button"
