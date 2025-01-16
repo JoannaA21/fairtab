@@ -3,12 +3,12 @@ import SplitType from "./SplitType";
 
 const CustomSplit = () => {
   const [bill, setBill] = useState({
-    totalBill: 0,
-    tipPercentage: 0,
+    totalBill: "",
+    tipPercentage: "",
     contributors: [
       {
         name: "",
-        amount: 0,
+        amount: "",
       },
     ],
   });
@@ -42,7 +42,7 @@ const CustomSplit = () => {
   const handleNewContributor = () => {
     setBill((prevBill) => ({
       ...prevBill,
-      contributors: [...prevBill.contributors, { name: "", amount: 0 }],
+      contributors: [...prevBill.contributors, { name: "", amount: "" }],
     }));
   };
 
@@ -63,7 +63,7 @@ const CustomSplit = () => {
     e.preventDefault();
     // Logic for calculating the breakdown or handling any errors can be added here
     const totalAmount = bill.contributors.reduce(
-      (acc, contributor) => acc + parseFloat(contributor.amount || 0),
+      (acc, contributor) => acc + parseFloat(contributor.amount),
       0
     );
 
@@ -91,57 +91,83 @@ const CustomSplit = () => {
   };
 
   return (
-    <div className="flex  min-h-screen max-w-screen-xl mx-auto bg-zinc-950">
+    <div className="flex min-h-screen max-w-screen-xl mx-auto bg-zinc-950">
       <div className="m-14 w-full bg-zinc-800 rounded-2xl">
         <SplitType />
-        <form onSubmit={handleSubmit}>
-          <div>
-            <ul>
-              {bill.contributors.map((contributor, index) => (
-                <li key={index}>
-                  <label>Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={contributor.name}
-                    onChange={(e) => handleInputChange(e, index)}
-                  />
 
-                  <label>Amount</label>
-                  <input
-                    type="number"
-                    name="amount"
-                    value={contributor.amount}
-                    onChange={(e) => handleInputChange(e, index)}
-                  />
-                </li>
-              ))}
-            </ul>
-            <button type="button" onClick={handleNewContributor}>
-              + Add Contributor
-            </button>
-          </div>
+        {/* Display error if any */}
+        {error && (
+          <p className="flex flex-col w-3/4 mx-auto my-7 sm:my-10 sm:text-xl items-center font-medium cursor-default text-red-500">
+            {error}
+          </p>
+        )}
 
-          {/* <label>Bill</label>
-        <input
-          type="number"
-          name="totalBill"
-          value={bill.totalBill}
-          onChange={handleInputChange}
-        /> */}
-          <label>Tip Percentage</label>
+        {/* form */}
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col mt-4 space-y-6 sm:space-y-8 max-w-xl w-full mx-auto items-center justify-center"
+        >
+          <input
+            type="number"
+            name="totalBill"
+            value={bill.totalBill}
+            onChange={handleInputChange}
+            className="p-3 sm:w-[20rem] md:w-[25rem] sm:p-5 mx-auto rounded-md"
+            placeholder="Total Bill"
+          />
+
           <input
             type="number"
             name="tipPercentage"
             value={bill.tipPercentage}
             onChange={handleInputChange}
+            className="p-3 sm:w-[20rem] md:w-[25rem] sm:p-5 mx-auto rounded-md"
+            placeholder="Tip Percentage"
           />
 
-          <button type="submit">Calculate</button>
-        </form>
+          <div className="flex flex-col mx-auto items-center justify-center space-y-6  sm:space-y-8">
+            <ul className="flex mx-auto items-center">
+              {bill.contributors.map((contributor, index) => (
+                <li
+                  key={index}
+                  className="w-full max-w-md flex flex-col space-y-6 sm:space-y-8 items-center"
+                >
+                  <input
+                    type="text"
+                    name="name"
+                    value={contributor.name}
+                    onChange={(e) => handleInputChange(e, index)}
+                    placeholder="Name"
+                    className="p-3 sm:w-[20rem] md:w-[25rem] sm:p-5 mx-auto rounded-md"
+                  />
 
-        {/* Display error if any */}
-        {error && <p className="error">{error}</p>}
+                  <input
+                    type="number"
+                    name="amount"
+                    value={contributor.amount}
+                    onChange={(e) => handleInputChange(e, index)}
+                    placeholder="Amount"
+                    className="p-3 sm:w-[20rem] md:w-[25rem] sm:p-5 mx-auto rounded-md"
+                  />
+                </li>
+              ))}
+            </ul>
+            <button
+              type="button"
+              onClick={handleNewContributor}
+              className="w-fit h-fit p-1 sm:p-3 font-medium sm:text-xl bg-zinc-300 hover:bg-zinc-950 hover:text-white rounded-lg"
+            >
+              + Add Contributor
+            </button>
+          </div>
+
+          <button
+            type="submit"
+            className="w-fit h-fit p-1 sm:p-3 mx-auto font-medium sm:text-3xl bg-zinc-300 hover:bg-zinc-950 hover:text-white rounded-lg"
+          >
+            Calculate
+          </button>
+        </form>
 
         {/* Display the breakdown of the split if available */}
         {breakdownSplit.length > 0 && (
@@ -162,3 +188,7 @@ const CustomSplit = () => {
 };
 
 export default CustomSplit;
+
+// Error not showing
+//Result has no design yet
+//I'm not sure if logic is right
