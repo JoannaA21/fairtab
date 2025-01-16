@@ -125,7 +125,7 @@ const EqualSplit = () => {
             <button
               type="button"
               onClick={clearForm}
-              className="w-fit h-fit p-1 sm:p-3 mx-auto font-medium sm:text-3xl bg-zinc-300 hover:bg-zinc-950 hover:text-white rounded-lg"
+              className="w-fit h-fit p-1 sm:p-3 mx-auto font-medium sm:text-3xl text-white bg-red-500 hover:bg-red-800 rounded-lg"
             >
               Clear
             </button>

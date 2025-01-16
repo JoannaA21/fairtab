@@ -77,17 +77,34 @@ const CustomSplit = () => {
     const totalWithTip = totalAmount + tipAmount;
 
     // Example: breakdown of the split (this is just an example logic)
-    const breakdown = bill.contributors.map((contributor) => {
-      const contributorShare =
-        (contributor.amount / totalAmount) * totalWithTip;
-      return {
-        name: contributor.name,
-        share: contributorShare.toFixed(2),
-      };
-    });
+    const breakdown = bill.contributors
+      .map((contributor) => {
+        const contributorShare =
+          (contributor.amount / totalAmount) * totalWithTip;
+        return {
+          name: contributor.name,
+          share: contributorShare.toFixed(2),
+        };
+      })
+      .filter((contributor) => contributor.name && contributor.share); // Filter out empty names and shares;
 
     setBreakdownSplit(breakdown);
     setError(""); // Clear any previous errors
+  };
+
+  const clearForm = () => {
+    setBill({
+      totalBill: "",
+      tipPercentage: "",
+      contributors: [
+        {
+          name: "",
+          amount: "",
+        },
+      ],
+    });
+
+    setBreakdownSplit({});
   };
 
   return (
@@ -125,20 +142,22 @@ const CustomSplit = () => {
             placeholder="Tip Percentage"
           />
 
-          <div className="flex flex-col mx-auto items-center justify-center space-y-6  sm:space-y-8">
-            <ul className="flex mx-auto items-center">
+          <div className="flex flex-col mx-auto items-center justify-center space-y-6 sm:space-y-8 ">
+            <ul className="flex flex-col mx-auto items-center space-y-6 sm:space-y-8">
               {bill.contributors.map((contributor, index) => (
                 <li
                   key={index}
-                  className="w-full max-w-md flex flex-col space-y-6 sm:space-y-8 items-center"
+                  className="w-full max-w-md flex flex-col items-center"
                 >
                   <input
                     type="text"
                     name="name"
+                    maxLength={10} // Limits input to 10 characters
                     value={contributor.name}
                     onChange={(e) => handleInputChange(e, index)}
                     placeholder="Name"
-                    className="p-3 sm:w-[20rem] md:w-[25rem] sm:p-5 mx-auto rounded-md"
+                    className="p-3 sm:w-[20rem] md:w-[25rem] sm:p-5 mx-auto border-b-2 border rounded-md"
+                    required
                   />
 
                   <input
@@ -147,11 +166,14 @@ const CustomSplit = () => {
                     value={contributor.amount}
                     onChange={(e) => handleInputChange(e, index)}
                     placeholder="Amount"
-                    className="p-3 sm:w-[20rem] md:w-[25rem] sm:p-5 mx-auto rounded-md"
+                    className="p-3 sm:w-[20rem] md:w-[25rem] sm:p-5 mx-auto border-t-2 border rounded-md"
+                    required
                   />
                 </li>
               ))}
             </ul>
+
+            {/* Add contributor button */}
             <button
               type="button"
               onClick={handleNewContributor}
@@ -161,22 +183,40 @@ const CustomSplit = () => {
             </button>
           </div>
 
+          {/* Calculate button */}
           <button
             type="submit"
             className="w-fit h-fit p-1 sm:p-3 mx-auto font-medium sm:text-3xl bg-zinc-300 hover:bg-zinc-950 hover:text-white rounded-lg"
           >
             Calculate
           </button>
+
+          {/* Clear button */}
+          {breakdownSplit.length > 0 && !error && (
+            <button
+              type="button"
+              onClick={clearForm}
+              className="w-fit h-fit p-1 sm:p-3 mx-auto font-medium sm:text-3xl text-white bg-red-500 hover:bg-red-800 rounded-lg"
+            >
+              Clear
+            </button>
+          )}
         </form>
 
         {/* Display the breakdown of the split if available */}
         {breakdownSplit.length > 0 && (
-          <div>
-            <h2>Breakdown:</h2>
+          <div className="flex flex-col my-5 md:my-12 w-2/3 sm:w-[20rem] md:w-[25rem]  max-h-fit mx-auto rounded-md bg-white">
+            <p className="mx-auto font-medium sm:text-xl md:text-2xl lg:text-3xl">
+              Breakdown
+            </p>
             <ul>
               {breakdownSplit.map((contributor, index) => (
-                <li key={index}>
-                  {contributor.name}: ${contributor.share}
+                <li
+                  key={index}
+                  className="flex p-2 sm:px-10 lg:px-16 md:text-xl lg:text-2xl justify-between"
+                >
+                  <span>{contributor.name}</span>
+                  <span>${contributor.share}</span>
                 </li>
               ))}
             </ul>
@@ -188,7 +228,3 @@ const CustomSplit = () => {
 };
 
 export default CustomSplit;
-
-// Error not showing
-//Result has no design yet
-//I'm not sure if logic is right
