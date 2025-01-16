@@ -59,7 +59,7 @@ const EqualSplit = () => {
   };
 
   return (
-    <div className="flex  min-h-screen max-w-screen-xl mx-auto bg-zinc-950">
+    <div className="flex min-h-screen max-w-screen-xl mx-auto bg-zinc-950">
       <div className="m-14 w-full bg-zinc-800 rounded-2xl">
         <SplitType />
 
@@ -72,11 +72,11 @@ const EqualSplit = () => {
         </h1> */}
 
         {error ? (
-          <p className="flex flex-col w-3/4 mx-auto my-7 items-center font-medium cursor-default text-red-500">
+          <p className="flex flex-col w-3/4 mx-auto my-7 sm:my-10 sm:text-xl items-center font-medium cursor-default text-red-500">
             {error}
           </p>
         ) : (
-          <h1 className="flex flex-col my-7 sm:mt-10 text-4xl sm:text-5xl items-center font-medium text-white cursor-default">
+          <h1 className="flex flex-col my-7 sm:my-10 text-4xl sm:text-7xl items-center font-medium text-white cursor-default">
             {amountPerPerson ? `$ ${amountPerPerson.toFixed(2)}` : "$0"}
           </h1>
         )}
@@ -84,43 +84,39 @@ const EqualSplit = () => {
         {/* form */}
         <form
           onSubmit={handleSubmit}
-          className="space-y-4 flex flex-col justify-center mx-auto"
+          className="flex flex-col space-y-6 sm:space-y-8 max-w-xl w-full mx-auto items-center justify-center"
         >
-          <label className="ml-4 font-medium text-white text-left">
-            Total Bill
-          </label>
           <input
             type="number"
             name="totalBill"
             value={bill.totalBill}
             onChange={handleInputChange}
-            className="min-w-[14rem] mx-auto"
+            className="p-3 sm:w-[20rem] md:w-[25rem] sm:p-5 mx-auto rounded-md"
+            placeholder="Total Bill"
           />
-          <label className="ml-4 font-medium text-white text-left">
-            Tip Percentage{" "}
-          </label>
+
           <input
             type="number"
             name="tipPercentage"
             value={bill.tipPercentage}
             onChange={handleInputChange}
-            className="min-w-[14rem] mx-auto"
+            className="p-3 sm:w-[20rem] md:w-[25rem]  mx-auto sm:p-5 rounded-md"
+            placeholder="Tip Percentage"
           />
-          <label className="ml-4 font-medium text-white text-left">
-            Number of People
-          </label>
+
           <input
             type="number"
             name="peopleCount"
             value={bill.peopleCount}
             onChange={handleInputChange}
-            className="min-w-[14rem] mx-auto"
+            className="p-3 sm:w-[20rem] md:w-[25rem]  mx-auto sm:p-5 rounded-md"
+            placeholder="Number of People"
           />
 
           {/* submit button */}
           <button
             type="submit"
-            className="w-fit h-fit p-1 mx-auto font-medium sm:text-xl bg-zinc-300 hover:bg-zinc-950 hover:text-white rounded-lg"
+            className="w-fit h-fit p-1 sm:p-3 mx-auto font-medium sm:text-3xl bg-zinc-300 hover:bg-zinc-950 hover:text-white rounded-lg"
           >
             Calculate
           </button>
@@ -129,7 +125,7 @@ const EqualSplit = () => {
             <button
               type="button"
               onClick={clearForm}
-              className="w-fit h-fit p-1 mx-auto font-medium sm:text-xl bg-zinc-300 hover:bg-zinc-950 hover:text-white rounded-lg"
+              className="w-fit h-fit p-1 sm:p-3 mx-auto font-medium sm:text-3xl bg-zinc-300 hover:bg-zinc-950 hover:text-white rounded-lg"
             >
               Clear
             </button>
